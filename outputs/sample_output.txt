@@ -1,0 +1,181 @@
+===================
+Dataset Information
+===================
+Dataset source: data/Iris.csv
+Dataset shape: 150 rows x 6 columns
+
+Column names and data types:
+Id                 int64
+SepalLengthCm    float64
+SepalWidthCm     float64
+PetalLengthCm    float64
+PetalWidthCm     float64
+Species              str
+
+Pandas info:
+<class 'pandas.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 6 columns):
+ #   Column         Non-Null Count  Dtype
+---  ------         --------------  -----
+ 0   Id             150 non-null    int64
+ 1   SepalLengthCm  150 non-null    float64
+ 2   SepalWidthCm   150 non-null    float64
+ 3   PetalLengthCm  150 non-null    float64
+ 4   PetalWidthCm   150 non-null    float64
+ 5   Species        150 non-null    str
+dtypes: float64(4), int64(1), str(1)
+memory usage: 9.1 KB
+
+First five rows:
+   Id  SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm      Species
+0   1            5.1           3.5            1.4           0.2  Iris-setosa
+1   2            4.9           3.0            1.4           0.2  Iris-setosa
+2   3            4.7           3.2            1.3           0.2  Iris-setosa
+3   4            4.6           3.1            1.5           0.2  Iris-setosa
+4   5            5.0           3.6            1.4           0.2  Iris-setosa
+
+Missing values by column:
+Id               0
+SepalLengthCm    0
+SepalWidthCm     0
+PetalLengthCm    0
+PetalWidthCm     0
+Species          0
+
+Duplicate rows found: 0
+
+Numeric summary statistics:
+            Id  SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm
+count  150.000        150.000       150.000        150.000       150.000
+mean    75.500          5.843         3.054          3.759         1.199
+std     43.445          0.828         0.434          1.764         0.763
+min      1.000          4.300         2.000          1.000         0.100
+25%     38.250          5.100         2.800          1.600         0.300
+50%     75.500          5.800         3.000          4.350         1.300
+75%    112.750          6.400         3.300          5.100         1.800
+max    150.000          7.900         4.400          6.900         2.500
+
+Categorical summary statistics:
+            Species
+count           150
+unique            3
+top     Iris-setosa
+freq             50
+
+===========================
+Automatic Dataset Decisions
+===========================
+Original shape: (150, 6)
+Cleaned shape: (150, 6)
+
+Target column: Species
+Target selection reason: Column name 'Species' matches a common target label.
+
+Feature columns selected for modeling:
+- SepalLengthCm
+- SepalWidthCm
+- PetalLengthCm
+- PetalWidthCm
+
+Columns removed from features because they look like IDs:
+- Id
+
+Duplicate rows removed: 0
+Rows removed because the target was missing: 0
+
+Missing values before cleaning:
+Id               0
+SepalLengthCm    0
+SepalWidthCm     0
+PetalLengthCm    0
+PetalWidthCm     0
+Species          0
+
+Missing values after duplicate and target cleanup:
+Id               0
+SepalLengthCm    0
+SepalWidthCm     0
+PetalLengthCm    0
+PetalWidthCm     0
+Species          0
+
+Preprocessing decisions:
+- Numeric features use median imputation and standard scaling: ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm']
+- No categorical feature columns were found.
+- Identifier columns are excluded because they describe row identity, not flower measurements.
+- Exact duplicate rows are removed before model training to avoid over-counting repeated samples.
+- Rows with missing target values are removed because supervised classification requires a known label.
+
+Modeling decisions:
+- The dataset is evaluated as a classification problem because the target has discrete classes.
+- The train/test split is 80/20 and stratified when every class has enough samples.
+- Logistic Regression provides an interpretable baseline; Decision Tree captures simple rule-based patterns; Random Forest adds an ensemble comparison.
+
+==================
+EDA Visualizations
+==================
+Saved visualization: outputs/figures/class_distribution.png
+Saved visualization: outputs/figures/feature_distributions.png
+Saved visualization: outputs/figures/correlation_heatmap.png
+
+Using stratified 80/20 train-test split.
+
+======================================
+Model Training and Accuracy Comparison
+======================================
+                   Model  Accuracy
+     Logistic Regression  0.933333
+Decision Tree Classifier  0.900000
+Random Forest Classifier  0.900000
+
+=====================
+Best Model Evaluation
+=====================
+Best model: Logistic Regression
+Accuracy score: 0.9333
+
+Confusion Matrix:
+                 Iris-setosa  Iris-versicolor  Iris-virginica
+Iris-setosa               10                0               0
+Iris-versicolor            0                9               1
+Iris-virginica             0                1               9
+
+Classification Report:
+                 precision    recall  f1-score   support
+
+    Iris-setosa       1.00      1.00      1.00        10
+Iris-versicolor       0.90      0.90      0.90        10
+ Iris-virginica       0.90      0.90      0.90        10
+
+       accuracy                           0.93        30
+      macro avg       0.93      0.93      0.93        30
+   weighted avg       0.93      0.93      0.93        30
+
+
+=====================
+New Sample Prediction
+=====================
+Input sample:
+ SepalLengthCm  SepalWidthCm  PetalLengthCm  PetalWidthCm
+           5.7           2.9            4.2           1.3
+
+Sample construction decisions:
+- SepalLengthCm: used value from NEW_SAMPLE_VALUES
+- SepalWidthCm: used value from NEW_SAMPLE_VALUES
+- PetalLengthCm: used value from NEW_SAMPLE_VALUES
+- PetalWidthCm: used value from NEW_SAMPLE_VALUES
+
+Predicted Species: Iris-versicolor
+
+Prediction probabilities:
+          Class Probability
+Iris-versicolor      0.8765
+ Iris-virginica      0.0751
+    Iris-setosa      0.0484
+
+===========
+Model Saved
+===========
+Saved best model artifact: models/best_iris_model.joblib
+Load it later with: joblib.load('models/best_iris_model.joblib')
