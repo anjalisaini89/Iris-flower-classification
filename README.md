@@ -181,17 +181,17 @@ Saved best model artifact: models/best_iris_model.joblib
 
 For a fuller run example, see [outputs/sample_output.txt](outputs/sample_output.txt).
 
-## Visualizations
 
-Running `main.py` generates:
+## Visualisation Outputs
 
-- `outputs/figures/class_distribution.png`
-- `outputs/figures/feature_distributions.png`
-- `outputs/figures/correlation_heatmap.png`
+### Pairplot — Feature Separability by Class
+![Pairplot](screenshots/pairplot.png)
 
-Use the `screenshots/` folder for GitHub, LinkedIn, or internship submission
-screenshots.
+### ROC Curves — All Models
+![ROC Curves](screenshots/roc_curves.png)
 
+### Confusion Matrix — Best Model
+![Confusion Matrix](screenshots/confusion_matrix_decision_tree_classifier.png)
 ## How to Load the Saved Model
 
 ```python
